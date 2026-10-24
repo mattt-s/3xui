@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mattt-s/3x-ui/releases"><img src="https://img.shields.io/github/v/release/mattt-s/3x-ui" alt="Release"></a>
-  <a href="https://github.com/mattt-s/3x-ui/actions"><img src="https://img.shields.io/github/actions/workflow/status/mattt-s/3x-ui/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mattt-s/3x-ui.svg" alt="GO Version"></a>
-  <a href="https://github.com/mattt-s/3x-ui/releases/latest"><img src="https://img.shields.io/github/downloads/mattt-s/3x-ui/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mattt-s/3xui/releases"><img src="https://img.shields.io/github/v/release/mattt-s/3xui" alt="Release"></a>
+  <a href="https://github.com/mattt-s/3xui/actions"><img src="https://img.shields.io/github/actions/workflow/status/mattt-s/3xui/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mattt-s/3xui.svg" alt="GO Version"></a>
+  <a href="https://github.com/mattt-s/3xui/releases/latest"><img src="https://img.shields.io/github/downloads/mattt-s/3xui/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
   <a href="https://pkg.go.dev/github.com/mhsanaei/3x-ui/v3"><img src="https://pkg.go.dev/badge/github.com/mhsanaei/3x-ui/v3.svg" alt="Go Reference"></a>
-  <a href="https://github.com/mattt-s/3x-ui/tree/main/docs"><img src="https://img.shields.io/badge/docs-fork-22d3ee" alt="Documentation"></a>
+  <a href="https://github.com/mattt-s/3xui/tree/main/docs"><img src="https://img.shields.io/badge/docs-fork-22d3ee" alt="Documentation"></a>
 </p>
 
 **3X-UI** یک پنل کنترل وب پیشرفته و متن‌باز برای مدیریت سرورهای [Xray-core](https://github.com/XTLS/Xray-core) است. این پنل یک رابط کاربری تمیز و چندزبانه برای استقرار، پیکربندی و نظارت بر طیف گسترده‌ای از پروتکل‌های پراکسی و VPN ارائه می‌دهد — از یک VPS تکی تا استقرارهای چندنودی.
@@ -74,26 +74,26 @@
 ## شروع سریع
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh)
 ```
 
 برای نصب یک نسخه‌ی مشخص، تگ آن را در انتها اضافه کنید (مثلاً `v3.7.0`):
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) v3.7.0
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) v3.7.0
 ```
 
 برای نصب نسخه‌ی غلتانِ **dev** (آخرین پیش‌انتشار به‌ازای هر کامیت از شاخه‌ی `main`، نه یک انتشار پایدار)، مقدار `dev-latest` را پاس دهید:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) dev-latest
 ```
 
 در حین نصب، یک نام کاربری، رمز عبور و مسیر دسترسی تصادفی تولید می‌شود. پس از نصب، دستور `x-ui` را اجرا کنید تا منوی مدیریت باز شود؛ در آنجا می‌توانید سرویس را شروع/متوقف کنید، اطلاعات ورود خود را ببینید یا بازنشانی کنید، گواهی‌های SSL را مدیریت کنید و کارهای دیگری انجام دهید.
 
 هر فایل انتشار به‌همراه یک جمع کنترلی `.sha256` در کنارش منتشر می‌شود. هم `install.sh` و هم به‌روزرسان، آرشیو را در برابر آن جمع کنترلی بررسی می‌کنند و در صورت عدم تطابق متوقف می‌شوند.
 
-برای مستندات کامل — نصب، پیکربندی، بهره‌برداری و مرجع کامل API — به **[docs/](https://github.com/mattt-s/3x-ui/tree/main/docs)** مراجعه کنید.
+برای مستندات کامل — نصب، پیکربندی، بهره‌برداری و مرجع کامل API — به **[docs/](https://github.com/mattt-s/3xui/tree/main/docs)** مراجعه کنید.
 
 ### نصب بدون نظارت
 
@@ -146,7 +146,7 @@ docker compose --profile postgres up -d
 این ایمیج، Fail2ban را (که به‌صورت پیش‌فرض فعال است) برای اعمال **محدودیت‌های IP** به‌ازای هر کلاینت همراه دارد. ‏Fail2ban متخلفان را با `iptables` مسدود می‌کند که به مجوز `NET_ADMIN` نیاز دارد. فایل `docker-compose.yml` این مجوز را از قبل از طریق `cap_add` می‌دهد؛ اگر به‌جای آن کانتینر را با `docker run` اجرا می‌کنید، خودتان مجوزها را اضافه کنید، در غیر این صورت مسدودسازی‌ها فقط ثبت می‌شوند اما هرگز اعمال نمی‌شوند:
 
 ```bash
-docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3x-ui.git#main
+docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3xui.git#main
 docker run -d --cap-add=NET_ADMIN --cap-add=NET_RAW ... 3x-ui-no-panel-ads:local
 ```
 
@@ -174,7 +174,7 @@ docker run -d --cap-add=NET_ADMIN --cap-add=NET_RAW ... 3x-ui-no-panel-ads:local
 | `XUI_NODE_TOKEN_KEY_FILE` | حلقه‌کلید JSON (با دسترسی `0600`) شامل شناسه‌ی کلید فعال و کلیدهای ۳۲ بایتی base64 | `/etc/x-ui/node_token_key.json` |
 | `XUI_NODE_TOKEN_KEY` | یک کلید ۳۲ بایتی base64 که تنها در صورت بارگذاری‌نشدن فایل کلید استفاده می‌شود | — |
 
-فهرست کامل در [مرجع متغیرهای محیطی](https://github.com/mattt-s/3x-ui/blob/main/docs/content/docs/fa/reference/env-vars.mdx) موجود است.
+فهرست کامل در [مرجع متغیرهای محیطی](https://github.com/mattt-s/3xui/blob/main/docs/content/docs/fa/reference/env-vars.mdx) موجود است.
 
 ## زبان‌های پشتیبانی‌شده
 
@@ -217,16 +217,16 @@ English · فارسی · العربية · 中文（简体） · 中文（繁體
 
 ## تاریخچه ستاره‌ها
 
-<a href="https://www.star-history.com/?repos=mhsanaei%2F3x-ui&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=mattt-s%2F3xui&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&legend=top-left" />
  </picture>
 </a>
 
 <p align="center">
- <a href="https://www.star-history.com/mattt-s/3x-ui">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending" /></picture>
+ <a href="https://www.star-history.com/mattt-s/3xui">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending" /></picture>
  </a>
 </p>

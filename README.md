@@ -8,18 +8,18 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mattt-s/3x-ui/releases"><img src="https://img.shields.io/github/v/release/mattt-s/3x-ui" alt="Release"></a>
-  <a href="https://github.com/mattt-s/3x-ui/actions"><img src="https://img.shields.io/github/actions/workflow/status/mattt-s/3x-ui/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mattt-s/3x-ui.svg" alt="GO Version"></a>
-  <a href="https://github.com/mattt-s/3x-ui/releases/latest"><img src="https://img.shields.io/github/downloads/mattt-s/3x-ui/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mattt-s/3xui/releases"><img src="https://img.shields.io/github/v/release/mattt-s/3xui" alt="Release"></a>
+  <a href="https://github.com/mattt-s/3xui/actions"><img src="https://img.shields.io/github/actions/workflow/status/mattt-s/3xui/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mattt-s/3xui.svg" alt="GO Version"></a>
+  <a href="https://github.com/mattt-s/3xui/releases/latest"><img src="https://img.shields.io/github/downloads/mattt-s/3xui/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
   <a href="https://pkg.go.dev/github.com/mhsanaei/3x-ui/v3"><img src="https://pkg.go.dev/badge/github.com/mhsanaei/3x-ui/v3.svg" alt="Go Reference"></a>
-  <a href="https://github.com/mattt-s/3x-ui/tree/main/docs"><img src="https://img.shields.io/badge/docs-fork-22d3ee" alt="Documentation"></a>
+  <a href="https://github.com/mattt-s/3xui/tree/main/docs"><img src="https://img.shields.io/badge/docs-fork-22d3ee" alt="Documentation"></a>
 </p>
 
 **3X-UI** is an advanced, open-source web control panel for managing [Xray-core](https://github.com/XTLS/Xray-core) servers. It provides a clean, multi-language interface for deploying, configuring, and monitoring a wide range of proxy and VPN protocols — from a single VPS to multi-node deployments.
 
-Built as an enhanced fork of the original X-UI project, 3X-UI adds broader protocol support, improved stability, per-client traffic accounting, and many quality-of-life features.
+This repository, [mattt-s/3xui](https://github.com/mattt-s/3xui), is a clone of 3X-UI. The upstream project is [mhsanaei/3x-ui](https://github.com/mhsanaei/3x-ui), an enhanced fork of the original X-UI project. Credit for the original project and its features belongs to the upstream contributors.
 
 > [!IMPORTANT]
 > This project is intended for personal use only. Please do not use it for illegal purposes or in a production environment.
@@ -73,27 +73,30 @@ Built as an enhanced fork of the original X-UI project, 3X-UI adds broader proto
 
 ## Quick Start
 
+> [!NOTE]
+> The installer, management menu, and panel updater download releases and scripts from `mattt-s/3xui`. Stable installs use the latest stable release; development installs use `dev-latest`. While this repository is private, GitHub authentication is required to access its scripts and release assets; the unauthenticated commands below will not work.
+
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh)
 ```
 
 To install a specific version, append its tag (e.g. `v3.7.0`):
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) v3.7.0
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) v3.7.0
 ```
 
 To install the rolling **dev** build (latest per-commit pre-release from `main`, not a stable release), pass `dev-latest`:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) dev-latest
 ```
 
 During installation a random username, password, and access path are generated. After installation, run `x-ui` to open the management menu, where you can start/stop the service, view or reset your login credentials, manage SSL certificates, and more.
 
 Every release asset is published with a `.sha256` sum next to it. Both `install.sh` and the updater verify the archive against that sum and abort on a mismatch.
 
-For full documentation — installation, configuration, operations, and the complete API reference — visit **[docs/](https://github.com/mattt-s/3x-ui/tree/main/docs)**.
+For full documentation — installation, configuration, operations, and the complete API reference — visit **[docs/](https://github.com/mattt-s/3xui/tree/main/docs)**.
 
 ### Unattended install
 
@@ -146,7 +149,7 @@ docker compose --profile postgres up -d
 The image bundles Fail2ban (enabled by default) to enforce per-client **IP limits**. Fail2ban bans offenders with `iptables`, which requires the `NET_ADMIN` capability. `docker-compose.yml` already grants it via `cap_add`; if you start the container with `docker run` instead, add the capabilities yourself, otherwise bans are logged but never applied:
 
 ```bash
-docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3x-ui.git#main
+docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3xui.git#main
 docker run -d --cap-add=NET_ADMIN --cap-add=NET_RAW ... 3x-ui-no-panel-ads:local
 ```
 
@@ -174,7 +177,7 @@ docker run -d --cap-add=NET_ADMIN --cap-add=NET_RAW ... 3x-ui-no-panel-ads:local
 | `XUI_NODE_TOKEN_KEY_FILE` | JSON keyring (mode `0600`) holding the active key id and its base64 32-byte keys | `/etc/x-ui/node_token_key.json` |
 | `XUI_NODE_TOKEN_KEY` | A single base64 32-byte key, used only when the key file cannot be loaded | — |
 
-The complete list is on the [environment variables reference](https://github.com/mattt-s/3x-ui/blob/main/docs/content/docs/en/reference/env-vars.mdx).
+The complete list is on the [environment variables reference](https://github.com/mattt-s/3xui/blob/main/docs/content/docs/en/reference/env-vars.mdx).
 
 ## Supported Languages
 
@@ -202,7 +205,9 @@ Tools and integrations built by the community around 3x-ui.
 - [terraform-provider-3x-ui](https://github.com/batonogov/terraform-provider-threexui) (License: **MIT**): _Manage inbounds, clients, panel settings, and Xray configuration as code with Terraform / OpenTofu._
 - [3X-UI Manager](https://github.com/yukh975/3X-UI-Manager) (License: **MIT**): _Native Android client for 3x-ui — dashboard, inbounds, clients with QR sharing, nodes and multi-panel management. Available on F-Droid._
 
-## Support project
+## Support the upstream project
+
+The donation links below support the original 3X-UI maintainer.
 
 **If this project is helpful to you, you may wish to give it a**:star2:
 
@@ -217,16 +222,16 @@ Tools and integrations built by the community around 3x-ui.
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=mhsanaei%2F3x-ui&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=mattt-s%2F3xui&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mattt-s/3x-ui&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mattt-s/3xui&type=date&legend=top-left" />
  </picture>
 </a>
 
 <p align="center">
- <a href="https://www.star-history.com/mattt-s/3x-ui">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=mattt-s/3x-ui&type=trending" /></picture>
+ <a href="https://www.star-history.com/mattt-s/3xui">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank" /><img alt="Star History Rank" src="https://api.star-history.com/badge?repo=mattt-s/3xui&type=rank" /></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending" /><img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=mattt-s/3xui&type=trending" /></picture>
  </a>
 </p>

@@ -11,7 +11,7 @@ export interface InstallOptions {
   webBasePath: string;
 }
 
-const REPO_RAW = 'https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh';
+const REPO_RAW = 'https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh';
 const IMAGE = '3x-ui-no-panel-ads:local';
 
 function isLatest(version: string): boolean {
@@ -42,7 +42,7 @@ export function buildDockerRun(options: InstallOptions): string {
   lines.push(`  --name 3x-ui`);
   lines.push(`  ${IMAGE}`);
   return (
-    'docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3x-ui.git#main\n' +
+    'docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3xui.git#main\n' +
     lines.join(' \\\n')
   );
 }
@@ -60,7 +60,7 @@ export function buildDockerCompose(options: InstallOptions): string {
   return [
     `services:`,
     `  3x-ui:`,
-    `    build: https://github.com/mattt-s/3x-ui.git#main`,
+    `    build: https://github.com/mattt-s/3xui.git#main`,
     `    image: ${IMAGE}`,
     `    container_name: 3x-ui`,
     `    volumes:`,

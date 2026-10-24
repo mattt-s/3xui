@@ -24,20 +24,20 @@ Virtuozzo, Arch, Manjaro, openSUSE (Tumbleweed/Leap), Alpine — а также �
 настраивает службу и устанавливает команду управления `x-ui`.
 
 ```bash title="latest stable"
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh)
 ```
 
 Чтобы установить **конкретную версию**, добавьте её тег:
 
 ```bash title="pinned version"
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) v3.4.0
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) v3.4.0
 ```
 
 Чтобы установить скользящую **dev**-сборку (последний предварительный релиз по
 каждому коммиту из `main` — не стабильный релиз), передайте `dev-latest`:
 
 ```bash title="rolling dev build"
-bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh) dev-latest
 ```
 
 По завершении запишите выведенные данные для входа и выполните `x-ui`, чтобы
@@ -68,7 +68,7 @@ docker compose --profile postgres up -d
 `NET_RAW`); в противном случае блокировки логируются, но никогда не применяются:
 
 ```bash title="docker run"
-docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3x-ui.git#main
+docker build -t 3x-ui-no-panel-ads:local https://github.com/mattt-s/3xui.git#main
 docker run -d \
   --cap-add=NET_ADMIN \
   --cap-add=NET_RAW \
@@ -89,7 +89,7 @@ docker run -d \
 <Tab value="Manual">
 
 Опытные пользователи могут скачать архив релиза для своей архитектуры со
-[страницы релизов](https://github.com/mattt-s/3x-ui/releases), распаковать его и
+[страницы релизов](https://github.com/mattt-s/3xui/releases), распаковать его и
 запустить бинарный файл как службу systemd. Установочный скрипт автоматизирует
 ровно эти шаги, поэтому он предпочтительнее, если только у вас нет особой причины
 устанавливать вручную.
@@ -124,10 +124,10 @@ docker run -d \
 записав их в `/etc/x-ui/install-result.env`:
 
 ```bash
-XUI_NONINTERACTIVE=1 bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh)
+XUI_NONINTERACTIVE=1 bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh)
 ```
 
-В каталоге [`deploy/`](https://github.com/mattt-s/3x-ui/tree/main/deploy)
+В каталоге [`deploy/`](https://github.com/mattt-s/3xui/tree/main/deploy)
 репозитория есть готовые **cloud-init** user-data для автоматической установки в
 любом облаке (Hetzner, AWS, DigitalOcean, Vultr, GCP, Azure, Oracle).
 

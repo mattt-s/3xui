@@ -169,7 +169,7 @@ test that cannot fail is invisible to CI. `make verify` is the local gate.
 
 ## Support facts reporters get wrong
 
-- Linux install: `bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3x-ui/main/install.sh)`
+- Linux install: `bash <(curl -Ls https://raw.githubusercontent.com/mattt-s/3xui/main/install.sh)`
 - Install generates a RANDOM username, password and web base path — never
   admin/admin. The `x-ui` menu on the server shows or resets them.
 - The installer service environment file is DISTRO-DEPENDENT:

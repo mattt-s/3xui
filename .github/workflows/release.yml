@@ -368,7 +368,7 @@ jobs:
         run: |
           gh release edit "$RELEASE_TAG" --prerelease=false --latest \
             --title "$RELEASE_TAG — ad-free panel" \
-            --notes "Stable release of the mattt-s/3x-ui fork. Removes paid sponsor placements and uses this repository for panel installations and updates. All platform packages and SHA-256 checksums are attached."
+            --notes "Stable release of the mattt-s/3xui fork. Removes paid sponsor placements and uses this repository for panel installations and updates. All platform packages and SHA-256 checksums are attached."
 
   # =================================
   #  Rolling dev channel (per-commit)
