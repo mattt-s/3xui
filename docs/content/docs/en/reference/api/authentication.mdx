@@ -1,0 +1,18 @@
+---
+title: Authentication
+description: Two authentication modes are supported. UI sessions use a cookie
+  set by the login endpoint. Programmatic clients (bots, scripts, remote panels)
+  authenticate with a Bearer token taken from Settings → Security → API Token.
+  Both work for every endpoint under /panel/api/*.
+full: true
+---
+
+export default function Layout(props) {
+  const { OpenAPIPage } = props.components ?? {};
+  return (
+    <>
+      {props.children}
+      <OpenAPIPage document="./public/openapi.json" webhooks={[]} operations={[{"path":"/login","method":"post"},{"path":"/logout","method":"post"},{"path":"/csrf-token","method":"get"},{"path":"/getTwoFactorEnable","method":"post"}]} showTitle />
+    </>
+  );
+}
