@@ -114,7 +114,7 @@ jobs:
           mkdir x-ui/bin
           cd x-ui/bin
 
-          # Keep the pinned core; recover it from our verified prior build if upstream removed it.
+          # Pin an available upstream core so a fresh clone needs no prior release.
           case "${{ matrix.platform }}" in
             amd64) XRAY_ARCH=64 ;;
             arm64) XRAY_ARCH=arm64-v8a ;;
@@ -125,24 +125,9 @@ jobs:
             s390x) XRAY_ARCH=s390x ;;
           esac
           XRAY_ASSET="Xray-linux-${XRAY_ARCH}.zip"
-          XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/v26.10.10/${XRAY_ASSET}"
-          HTTP_CODE=$(curl -sSL --retry 3 --retry-delay 3 -o "$XRAY_ASSET" -w '%{http_code}' "$XRAY_URL")
-          if [ "$HTTP_CODE" = 200 ]; then
-            unzip "$XRAY_ASSET"
-          elif [ "$HTTP_CODE" = 404 ]; then
-            RUNTIME_ASSET="x-ui-linux-${{ matrix.platform }}.tar.gz"
-            RUNTIME_URL="https://github.com/${{ github.repository }}/releases/download/dev-latest/${RUNTIME_ASSET}"
-            mkdir runtime-cache
-            curl -sfL $CURL_RETRY "$RUNTIME_URL" -o "runtime-cache/$RUNTIME_ASSET"
-            curl -sfL $CURL_RETRY "$RUNTIME_URL.sha256" -o "runtime-cache/$RUNTIME_ASSET.sha256"
-            (cd runtime-cache && sha256sum -c "$RUNTIME_ASSET.sha256")
-            tar -xzf "runtime-cache/$RUNTIME_ASSET" -C runtime-cache "x-ui/bin/xray-linux-${{ matrix.platform }}"
-            cp "runtime-cache/x-ui/bin/xray-linux-${{ matrix.platform }}" xray
-            rm -rf runtime-cache
-          else
-            echo "Xray download failed with HTTP $HTTP_CODE"
-            exit 1
-          fi
+          XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/v26.10.21/${XRAY_ASSET}"
+          curl -fL -sS $CURL_RETRY "$XRAY_URL" -o "$XRAY_ASSET"
+          unzip "$XRAY_ASSET"
           rm -f "$XRAY_ASSET"
           rm -f geoip.dat geosite.dat
           fetch https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
@@ -282,24 +267,9 @@ jobs:
           cd x-ui\bin
 
           # Download Xray for Windows
-          $Xray_URL = "https://github.com/XTLS/Xray-core/releases/download/v26.10.10/"
-          try {
-            Invoke-WebRequest @retry -Uri "${Xray_URL}Xray-windows-64.zip" -OutFile "Xray-windows-64.zip"
-            Expand-Archive -Path "Xray-windows-64.zip" -DestinationPath .
-          } catch {
-            if ([int]$_.Exception.Response.StatusCode -ne 404) { throw }
-            $runtimeAsset = "x-ui-windows-amd64.zip"
-            $runtimeUrl = "https://github.com/${{ github.repository }}/releases/download/dev-latest/$runtimeAsset"
-            Invoke-WebRequest @retry -Uri $runtimeUrl -OutFile $runtimeAsset
-            Invoke-WebRequest @retry -Uri "$runtimeUrl.sha256" -OutFile "$runtimeAsset.sha256"
-            $expected = ((Get-Content "$runtimeAsset.sha256" -Raw).Trim() -split '\s+')[0]
-            $actual = (Get-FileHash $runtimeAsset -Algorithm SHA256).Hash.ToLower()
-            if ($actual -ne $expected) { throw "Cached runtime checksum mismatch" }
-            Expand-Archive -Path $runtimeAsset -DestinationPath runtime-cache
-            Copy-Item runtime-cache/x-ui/bin/xray-windows-amd64.exe xray.exe
-            Remove-Item -Recurse -Force runtime-cache
-            Remove-Item $runtimeAsset, "$runtimeAsset.sha256"
-          }
+          $Xray_URL = "https://github.com/XTLS/Xray-core/releases/download/v26.10.21/"
+          Invoke-WebRequest @retry -Uri "${Xray_URL}Xray-windows-64.zip" -OutFile "Xray-windows-64.zip"
+          Expand-Archive -Path "Xray-windows-64.zip" -DestinationPath .
           Remove-Item "Xray-windows-64.zip" -ErrorAction SilentlyContinue
           Remove-Item geoip.dat, geosite.dat -ErrorAction SilentlyContinue
           Invoke-WebRequest @retry -Uri "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat" -OutFile "geoip.dat"
